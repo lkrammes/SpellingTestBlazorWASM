@@ -1,0 +1,20 @@
+﻿@page "/spellingtest/create"
+@using SpellingTestBlazor.Shared
+@inject NavigationManager uriHelper
+@inject HttpClient Http
+
+<h3>Create</h3>
+<Form ButtonText="Create Test" test="@test"
+      OnValidSubmit="@CreateTestAsync">
+</Form>
+
+@code {
+    SpellingTest test = new SpellingTest();
+
+    async Task CreateTestAsync()
+    {
+        await Http.PostAsJsonAsync("api/SpellingTest/AddSpellingTest", test);
+        uriHelper.NavigateTo("spellingtests");
+    }
+
+}

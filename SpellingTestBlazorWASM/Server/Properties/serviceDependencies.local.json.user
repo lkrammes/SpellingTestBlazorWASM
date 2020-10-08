@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "appInsights1": {
+      "restored": true,
+      "restoreTime": "2020-10-03T20:01:10.8724417Z"
+    },
+    "secrets1": {
+      "restored": true,
+      "restoreTime": "2020-10-03T20:01:06.7658576Z"
+    }
+  },
+  "parameters": {
+    "appInsights1.resourceGroupName": {
+      "Type": "resourceGroup",
+      "Value": "rg-spellingtestblazor"
+    },
+    "appInsights1.subscriptionId": {
+      "Type": "subscription",
+      "Value": "07cc8094-9320-46ed-bc7b-c25ec9253128"
+    }
+  }
+}

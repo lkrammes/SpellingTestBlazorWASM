@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30523.141
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpellingTestBlazorWASM.Server", "SpellingTestBlazorWASM\Server\SpellingTestBlazorWASM.Server.csproj", "{BD33B6DE-71C6-4B38-9CC4-606E57F08CE8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpellingTestBlazorWASM.Client", "SpellingTestBlazorWASM\Client\SpellingTestBlazorWASM.Client.csproj", "{2263F4F7-3940-4E95-9BAC-A9A897A43D76}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpellingTestBlazorWASM.Shared", "SpellingTestBlazorWASM\Shared\SpellingTestBlazorWASM.Shared.csproj", "{7292F128-D8D4-4011-83FC-1BB440927E18}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BD33B6DE-71C6-4B38-9CC4-606E57F08CE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD33B6DE-71C6-4B38-9CC4-606E57F08CE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD33B6DE-71C6-4B38-9CC4-606E57F08CE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD33B6DE-71C6-4B38-9CC4-606E57F08CE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2263F4F7-3940-4E95-9BAC-A9A897A43D76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2263F4F7-3940-4E95-9BAC-A9A897A43D76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2263F4F7-3940-4E95-9BAC-A9A897A43D76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2263F4F7-3940-4E95-9BAC-A9A897A43D76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7292F128-D8D4-4011-83FC-1BB440927E18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7292F128-D8D4-4011-83FC-1BB440927E18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7292F128-D8D4-4011-83FC-1BB440927E18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7292F128-D8D4-4011-83FC-1BB440927E18}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9BA80D06-8528-479D-A26C-BF683C109BA7}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://lkrammes.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = SpellingTestBlazorWASM\\Client\\SpellingTestBlazorWASM.Client.csproj
+		SccProjectName1 = SpellingTestBlazorWASM/Client
+		SccLocalPath1 = SpellingTestBlazorWASM\\Client
+		SccProjectUniqueName2 = SpellingTestBlazorWASM\\Server\\SpellingTestBlazorWASM.Server.csproj
+		SccProjectName2 = SpellingTestBlazorWASM/Server
+		SccLocalPath2 = SpellingTestBlazorWASM\\Server
+		SccProjectUniqueName3 = SpellingTestBlazorWASM\\Shared\\SpellingTestBlazorWASM.Shared.csproj
+		SccProjectName3 = SpellingTestBlazorWASM/Shared
+		SccLocalPath3 = SpellingTestBlazorWASM\\Shared
+	EndGlobalSection
+EndGlobal

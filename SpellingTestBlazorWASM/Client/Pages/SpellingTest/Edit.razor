@@ -1,0 +1,29 @@
+﻿@page "/spellingtest/edit/{testId:guid}"
+@using SpellingTestBlazor.Shared
+@inject NavigationManager uriHelper
+@inject HttpClient Http
+
+<h3>Edit</h3>
+<Form ButtonText="Update" test="test"
+      OnValidSubmit="@UpdateWord">
+</Form>
+
+@code {
+
+    [Parameter]
+    public Guid testId { get; set; }
+
+    SpellingTest test = new SpellingTest();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        test = await Http.GetFromJsonAsync<SpellingTest>($"api/SpellingTest/GetSpellingTest?testId={testId}");
+    }
+
+    async Task UpdateWord()
+    {
+        await Http.PutAsJsonAsync("api/SpellingTest/UpdateSpellingTest", test);
+        uriHelper.NavigateTo("spellingtests");
+    }
+
+}

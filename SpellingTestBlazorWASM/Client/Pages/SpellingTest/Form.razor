@@ -1,0 +1,37 @@
+﻿
+@using SpellingTestBlazor.Shared
+<EditForm Model="@test" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator/>
+    <div class="form-group">
+        <label>Test Name :</label>
+        <div>
+            <InputText @bind-Value="@test.TestName" />
+            <ValidationMessage For="@(() => test.TestName)" />
+        </div>
+    </div>
+    <div class="form-group ">
+        <div>
+            <label>Words :</label>
+            <div>
+                <InputTextArea @bind-Value="@test.SpellingWords" />
+                <ValidationMessage For="@(() => test.SpellingWords)"/>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success">
+        @ButtonText
+    </button>
+</EditForm>
+
+@code {
+
+    [Parameter]
+    public SpellingTest test { get; set; }
+
+    [Parameter]
+    public string ButtonText { get; set; } = "Save";
+
+    [Parameter]
+    public EventCallback OnValidSubmit { get; set; }
+
+}

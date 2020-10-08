@@ -1,0 +1,156 @@
+﻿@page "/taketest/{testid:guid}"
+@using SpellingTestBlazor.Shared
+@using System
+@using System.Collections.Generic
+@using System.Linq
+@using System.Threading.Tasks
+@inject NavigationManager uriHelper
+@inject HttpClient Http
+@inject IJSRuntime JsRunTime
+
+<h3>Take Test</h3>
+
+@if (_words == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else
+{
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Enter your name:</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr>
+            <td><input @bind="@name" /></td>
+        </tr>
+
+        </tbody>
+    </table>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Word</th>
+                <th>Answer</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (SpellingTestQuestion word in _words)
+            {
+                <tr>
+                    <td><input @bind="@word.Answer" /></td>
+                    <td>
+                        <a class="btn btn-success" @onclick="@(() => SpeakAsync(word.Word))">Speak</a>
+                        <a class="btn btn-success" @onclick="@(() => SpeakSlowAsync(word.Word))">Slowly</a>
+                        <button class="btn btn-danger" @onclick="@(() => CheckAsync(word))">Check</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button class="btn btn-danger" @onclick="@(() => CheckAllAsync())">Check All</button>
+}
+
+@code {
+
+    [Parameter]
+    public Guid testid { get; set; }
+
+
+    private string name = string.Empty;
+    private IEnumerable<SpellingTestQuestion> _words;
+    private readonly Random _random = new Random();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var task = JsRunTime.InvokeVoidAsync("SpeechLib.InitSpeech", "<YOUR COG SERVICES KEY>", "<YOU COG SERVICES REGION>");
+        _words ??= await Http.GetFromJsonAsync<IEnumerable<SpellingTestQuestion>>($"api/SpellingTest/GetSpellingTestQuestions?testId={testid}");
+        await task;
+    }
+
+    async Task SpeakAsync(string word)
+    {
+      await JsRunTime.InvokeVoidAsync("SpeechLib.Speak", word);
+    }
+
+
+    async Task SpeakSlowAsync(string word)
+    {
+        await JsRunTime.InvokeVoidAsync("SpeechLib.SpeakSlow", word);
+    }
+
+    async Task CheckAsync(SpellingTestQuestion word)
+    {
+        if (string.IsNullOrWhiteSpace(word.Answer))
+        {
+            await JsRunTime.InvokeVoidAsync("SpeechLib.SpeakStyle", "Dude, you have to enter something to check it, come on", "angry");
+        }
+        else
+        {
+            if (String.Equals(word.Word, word.Answer, StringComparison.CurrentCultureIgnoreCase))
+            {
+                int random = _random.Next(0, 100);
+                if (random >= 75)
+                {
+                    await JsRunTime.InvokeVoidAsync("SpeechLib.SpeakStyle", $"You got it {name}! Keep up the good work", "cheerful");
+                }
+                else if (random >= 50)
+                {
+                    await JsRunTime.InvokeVoidAsync("SpeechLib.SpeakStyle", $"Yes, {name} you are amazing", "cheerful");
+                }
+                else if (random >= 25)
+                {
+                    await JsRunTime.InvokeVoidAsync("SpeechLib.SpeakStyle", $"Yup, I can't stump you, good job {name}", "cheerful");
+                }
+                else if (random >= 0)
+                {
+                    await JsRunTime.InvokeVoidAsync("SpeechLib.SpeakStyle", "Dude!, you are a spelling master", "cheerful");
+                }
+            }
+            else
+            {
+                await JsRunTime.InvokeVoidAsync("SpeechLib.SpeakStyle", "Nope, try again", "sad");
+            }
+
+        }
+
+    }
+
+    async Task CheckAllAsync()
+    {
+        var missing = new List<string>();
+        var wrong = new List<string>();
+        foreach (var word in _words)
+        {
+            if (string.IsNullOrWhiteSpace(word.Answer))
+            {
+                missing.Add(word.Word);
+            }
+            else if (!String.Equals(word.Word, word.Answer, StringComparison.CurrentCultureIgnoreCase))
+            {
+                wrong.Add(word.Word);
+            }
+        }
+
+        if (missing.Any())
+        {
+            await JsRunTime.InvokeVoidAsync("SpeechLib.SpeakStyle", "You are missing some answers, go back and fill them all in", "sad");
+        }
+        else if (wrong.Any())
+        {
+            await JsRunTime.InvokeVoidAsync("SpeechLib.SpeakStyle", $"Some of your answers are wrong {string.Join(",", wrong)}", "sad");
+        }
+        else
+        {
+            await JsRunTime.InvokeVoidAsync("SpeechLib.SpeakStyle", "Congratulations, you passed", "cheerful");
+        }
+    }
+}
