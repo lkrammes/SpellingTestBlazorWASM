@@ -15,7 +15,7 @@ namespace SpellingTestBlazorWASM.Server.Data.Services
 
         public SpeechService()
         {
-            SpeechConfig config = SpeechConfig.FromSubscription("d6fd91a3cfcc411080e0706584881168", "eastus");
+            SpeechConfig config = SpeechConfig.FromSubscription("TODO", "eastus");
             _speechSynthesizer = new SpeechSynthesizer(config);
         }
 
